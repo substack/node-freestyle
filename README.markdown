@@ -27,7 +27,6 @@ output:
 
     $ node examples/rap.js
     house up as a a rare rare pleasure kernes
-    require extraordinary Extraordinary claims claims require require extraordinary
-    bull
+    require extraordinary Extraordinary claims claims require require extraordinary bull
     out there is a part of it turns
     REMEMBER it turns out of the future full
