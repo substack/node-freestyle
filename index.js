@@ -22,12 +22,31 @@ module.exports = function (stream, cb) {
     ;
 };
 
-function couplet (m, r) {
-    var A = m.respond(m.pick(), 8);
-    if (A.length <= 5) { // make longer with random padding
-        A.unshift.apply(A, m.respond(m.pick(), 8 - A.length));
+function couplet (m, r, syllables) {
+    function countSyllables (ws) {
+        return ws.reduce(function (sum, w) {
+            var s = r.syllables(w);
+            if (s) return sum + s;
+            var vs = w.match(/[aeiouy]+/ig);
+            if (vs) return sum + vs.length;
+            return sum;
+        }, 0);
     }
-    A.splice(0, A.length - 8);
+    
+    function fitSyllables (ws) {
+        while (countSyllables(ws) < syllables) {
+            ws.unshift.apply(ws, m.respond(m.pick()));
+        }
+        
+        while (countSyllables(ws) > syllables) {
+            ws.shift();
+        }
+        
+        return ws;
+    }
+    
+    var A = m.respond(m.pick(), 8);
+    if (syllables) A = fitSyllables(A);
     
     var pivot = A.slice(-1)[0].replace(/[^A-Za-z\d'-]/g, '');
     var rhymes = r.rhyme(pivot);
@@ -43,10 +62,7 @@ function couplet (m, r) {
     }
     
     var B = m.backward(rh, 8).concat(rh);
-    if (B.length <= 5) { // make longer with random padding
-        B.unshift.apply(B, m.respond('', 8 - B.length));
-    }
-    B.splice(0, B.length - 8);
+    if (syllables) B = fitSyllables(B);
     
     return [ A.join(' '), B.join(' ') ];
 }
