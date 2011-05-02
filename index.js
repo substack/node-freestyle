@@ -45,7 +45,7 @@ function couplet (m, r, syllables) {
         return ws;
     }
     
-    var A = m.respond(m.pick(), 8);
+    var A = m.respond(m.pick());
     if (syllables) A = fitSyllables(A);
     
     var pivot = A.slice(-1)[0].replace(/[^A-Za-z\d'-]/g, '');
@@ -61,7 +61,7 @@ function couplet (m, r, syllables) {
         }
     }
     
-    var B = m.backward(rh, 8).concat(rh);
+    var B = m.backward(rh).concat(rh);
     if (syllables) B = fitSyllables(B);
     
     return [ A.join(' '), B.join(' ') ];

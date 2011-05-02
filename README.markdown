@@ -14,9 +14,9 @@ rap.js
 
     var s = fs.createReadStream(__dirname + '/qwantz.txt');
 
-    freestyle(s, function (rap) {
-        var A = rap.couplet();
-        var B = rap.couplet();
+    freestyle(s, function (r) {
+        var A = r.couplet();
+        var B = r.couplet();
         
         console.log([
             A[0], B[0], A[1], B[1], ''
@@ -30,3 +30,28 @@ output:
     require extraordinary Extraordinary claims claims require require extraordinary bull
     out there is a part of it turns
     REMEMBER it turns out of the future full
+
+methods
+=======
+
+freestyle(stream, cb)
+---------------------
+
+Seed a markov system with `stream` and call `cb` with a freestyle handle when
+it's ready.
+
+freestyle handle
+================
+
+r.couplet(syllables)
+--------------------
+
+Generate a couplet with approximately `syllables`.
+If `syllables` is falsy then lines can be any length.
+
+installation
+============
+
+With [npm](http://npmjs.org):
+
+    npm install freestyle

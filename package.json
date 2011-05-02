@@ -1,7 +1,7 @@
 {
     "name" : "freestyle",
     "description" : "Really terrible freestyle markov rapping",
-    "version" : "0.0.1",
+    "version" : "0.0.2",
     "repository" : {
         "type" : "git",
         "url" : "git://github.com/substack/node-freestyle.git"
@@ -27,7 +27,7 @@
         "node" : ">=0.4.0"
     },
     "dependencies" : {
-        "rhyme" : ">=0.0.1",
+        "rhyme" : ">=0.0.3",
         "markov" : ">=0.0.4",
         "deck" : ">=0.0.3",
         "seq" : ">=0.2.4"
