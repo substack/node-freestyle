@@ -1,11 +1,23 @@
 {
     "name" : "freestyle",
-    "description" : "Freestyle markov rapping",
+    "description" : "Really terrible freestyle markov rapping",
     "version" : "0.0.1",
     "repository" : {
         "type" : "git",
         "url" : "git://github.com/substack/node-freestyle.git"
     },
+    "keywords" : [
+        "rap",
+        "battle",
+        "freestyle",
+        "rhyme",
+        "rhyming",
+        "mic",
+        "beats",
+        "poet",
+        "poem",
+        "couplet"
+    ],
     "main" : "./index.js",
     "directories" : {
         "lib" : ".",
