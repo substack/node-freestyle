@@ -1,0 +1,29 @@
+{
+    "name" : "freestyle",
+    "description" : "Freestyle markov rapping",
+    "version" : "0.0.1",
+    "repository" : {
+        "type" : "git",
+        "url" : "git://github.com/substack/node-freestyle.git"
+    },
+    "main" : "./index.js",
+    "directories" : {
+        "lib" : ".",
+        "example" : "./example"
+    },
+    "engines" : {
+        "node" : ">=0.4.0"
+    },
+    "dependencies" : {
+        "rhyme" : ">=0.0.1",
+        "markov" : ">=0.0.4",
+        "deck" : ">=0.0.3",
+        "seq" : ">=0.2.4"
+    },
+    "license" : "MIT/X11",
+    "author" : {
+        "name" : "James Halliday",
+        "email" : "mail@substack.net",
+        "url" : "http://substack.net"
+    }
+}
