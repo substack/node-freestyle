@@ -43,7 +43,18 @@ function methods (m, r) {
         return ws;
     }
     
-    var self = {};
+    var self = { rhyme : r };
+    
+    self.prose = function (rhymeWith, syllables) {
+        var rhymes = r.rhyme(rhymeWith || m.pick());
+        if (rhymes.length === 0) rhymes = [ m.pick() ];
+        var rh = deck.pick(rhymes);
+        
+        var words = m.backward(rh).concat(rh);
+        if (syllables) words = fitSyllables(syllables, words);
+        
+        return words;
+    };
     
     self.couplet = function (syllables) {
         var A = m.respond(m.pick());
