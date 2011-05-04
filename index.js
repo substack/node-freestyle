@@ -15,14 +15,12 @@ module.exports = function (stream, cb) {
             m.seed(stream, this);
         })
         .seq(function (r) {
-            cb({
-                couplet : couplet.bind(null, m, r)
-            })
-        });
+            cb(methods(m, r));
+        })
     ;
 };
 
-function couplet (m, r, syllables) {
+function methods (m, r) {
     function countSyllables (ws) {
         return ws.reduce(function (sum, w) {
             var s = r.syllables(w);
@@ -33,7 +31,7 @@ function couplet (m, r, syllables) {
         }, 0);
     }
     
-    function fitSyllables (ws) {
+    function fitSyllables (syllables, ws) {
         while (countSyllables(ws) < syllables) {
             ws.unshift.apply(ws, m.respond(m.pick()));
         }
@@ -45,24 +43,30 @@ function couplet (m, r, syllables) {
         return ws;
     }
     
-    var A = m.respond(m.pick());
-    if (syllables) A = fitSyllables(A);
+    var self = {};
     
-    var pivot = A.slice(-1)[0].replace(/[^A-Za-z\d'-]/g, '');
-    var rhymes = r.rhyme(pivot);
-    
-    var rh = rhymes && m.search(rhymes.join(' '));
-    
-    if (!rh) {
-        rh = m.word(m.pick());
-        var fixRhyme = r.rhyme(rh);
-        if (fixRhyme.length) {
-            A.push(deck.pick(fixRhyme).toLowerCase());
+    self.couplet = function (syllables) {
+        var A = m.respond(m.pick());
+        if (syllables) A = fitSyllables(syllables, A);
+        
+        var pivot = A.slice(-1)[0].replace(/[^A-Za-z\d'-]/g, '');
+        var rhymes = r.rhyme(pivot);
+        
+        var rh = rhymes && m.search(rhymes.join(' '));
+        
+        if (!rh) {
+            rh = m.word(m.pick());
+            var fixRhyme = r.rhyme(rh);
+            if (fixRhyme.length) {
+                A.push(deck.pick(fixRhyme).toLowerCase());
+            }
         }
-    }
+        
+        var B = m.backward(rh).concat(rh);
+        if (syllables) B = fitSyllables(syllables, B);
+        
+        return [ A.join(' '), B.join(' ') ];
+    };
     
-    var B = m.backward(rh).concat(rh);
-    if (syllables) B = fitSyllables(B);
-    
-    return [ A.join(' '), B.join(' ') ];
+    return self;
 }
