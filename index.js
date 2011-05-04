@@ -33,7 +33,10 @@ function methods (m, r) {
     
     function fitSyllables (syllables, ws) {
         while (countSyllables(ws) < syllables) {
-            ws.unshift.apply(ws, m.respond(m.pick()));
+            var pick = m.pick();
+            var res = m.respond(pick);
+            ws.unshift.apply(ws, res);
+
         }
         
         while (countSyllables(ws) > syllables) {
