@@ -34,11 +34,11 @@ output:
 methods
 =======
 
-freestyle(stream, cb)
----------------------
+freestyle(stream, order=1, cb)
+------------------------------
 
-Seed a markov system with `stream` and call `cb` with a freestyle handle when
-it's ready.
+Seed a markov system of `order` with `stream` and call `cb` with a freestyle
+handle when it's ready.
 
 freestyle handle
 ================
