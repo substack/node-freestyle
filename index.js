@@ -50,7 +50,13 @@ function methods (m, r) {
     
     self.prose = function (rhymeWith, syllables) {
         var rhymes = r.rhyme(rhymeWith || m.pick());
-        if (rhymes.length === 0) rhymes = [ m.pick() ];
+        
+        while (rhymes.length === 0) {
+            var p = m.pick();
+            var rx = r.rhyme(p);
+            if (rx.length) rhymes = [ p ]
+        }
+        
         var rh = deck.pick(rhymes);
         
         var words = m.backward(rh).concat(rh);
