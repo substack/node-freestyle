@@ -4,8 +4,13 @@ var markov = require('markov');
 var deck = require('deck');
 var Seq = require('seq');
 
-module.exports = function (stream, cb) {
-    var m = markov(1);
+module.exports = function (stream, order, cb) {
+    if (typeof order === 'function') {
+        cb = order;
+        order = 1;
+    }
+    
+    var m = markov(order);
     
     Seq()
         .par(function () {
